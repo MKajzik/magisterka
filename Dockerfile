@@ -5,8 +5,6 @@ FROM arm64v8/python:3.11.2-alpine
 COPY main.py ./
 COPY wiringOP-Python ./
 
-RUN apt-get install apparmor
-RUN apt dist-upgrade
 RUN apt-get install swig python3-dev python3-setuptools
 
 # Install wiringOP-Python
