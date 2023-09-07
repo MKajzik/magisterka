@@ -261,7 +261,7 @@ def PrintTemp(pin):
 atexit.register(CleanUP)
 
 while(True):
-    PrintHumi(soil_pin)
     PrintTemp(temp_pin)
+    PrintHumi(soil_pin)
     time.sleep(delay)
 
