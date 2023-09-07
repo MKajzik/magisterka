@@ -174,9 +174,6 @@ def PrintHumi(pin):
 	elif(voltage < airVoltage and voltage > (airVoltage - intervals)):
 		print("Sucho")
 
-	if(voltage > (waterVoltage + intervals) and voltage < (airVoltage - intervals)):
-		print("Jednak jestem")
-
 	soil_moisture["soil_moisture_actual"]["value"] = voltage
 	soil_moisture["soil_moisture_actual"]["timestamp"] = ct
 
