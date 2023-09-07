@@ -13,7 +13,7 @@ spi.max_speed_hz=1000000
 
 soil_pin = 15
 temp_pin = 6
-delay = 10
+delay = 10000
 water_pump_pin = 9
 
 if (os.path.isfile("./humidity_temperature.json") == True):
@@ -73,7 +73,6 @@ wiringpi.wiringPiSetup()
 wiringpi.pinMode(16, GPIO.OUTPUT)
 wiringpi.digitalWrite(16, GPIO.HIGH)
 wiringpi.pinMode(soil_pin, GPIO.OUTPUT)
-wiringpi.pinMode(temp_pin, GPIO.OUTPUT)
 wiringpi.pinMode(water_pump_pin, GPIO.OUTPUT)
 
 class DateTimeEncoder(json.JSONEncoder):
@@ -100,6 +99,7 @@ def CleanUP():
 def TempGetVal(pin):
 	tl=[]
 	tb=[]
+	wiringpi.pinMode(pin, GPIO.OUTPUT)
 	wiringpi.digitalWrite(pin, GPIO.HIGH)
 	wiringpi.delay(1)
 	wiringpi.digitalWrite(pin, GPIO.LOW)
@@ -148,13 +148,13 @@ def TempGetResult(pin):
 			else:
 				print("Odczyt poprawny, błąd sumy kontrolnej! Ponowny odczyt")
 				flag=1
-				time.sleep(1)
+				wiringpi.delay(1000)
 
 		else:
 			print("Błąd odczytu! Ponowny odczyt")
 			flag = 1
 			break
-		wiringpi.delay(200)
+		wiringpi.delay(1000)
 	return SH,SL,TH,TL,flag
 
 def Humidity(pin):
@@ -264,5 +264,5 @@ atexit.register(CleanUP)
 while(True):
     PrintHumi(soil_pin)
     PrintTemp(temp_pin)
-    time.sleep(delay)
+    wiringpi.delay(delay)
 
