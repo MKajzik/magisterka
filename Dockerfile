@@ -5,6 +5,8 @@ FROM arm32v7/python:3.11.2-alpine
 COPY main.py ./
 COPY wiringOP-Python ./
 
+RUN sudo apt-get install swig python3-dev python3-setuptools
+
 # Install wiringOP-Python
 RUN python3 wiringOP-Python/generate-bindings.py > wiringOP-Python/bindings.i
 RUN sudo python3 wiringOP-Python/setup.py install
