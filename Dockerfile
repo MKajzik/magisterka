@@ -3,6 +3,8 @@ FROM arm64v8/python:3.11.2-alpine
 
 WORKDIR /magisterka
 
+RUN chmod 777 /magisterka
+
 # Copy the Python Script to blink LED
 COPY main.py .
 COPY wiringOP-Python /wiringOP-Python
