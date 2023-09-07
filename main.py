@@ -91,6 +91,7 @@ def ConvertToVoltage(value, bitdepth, vref):
 
 def CleanUP():
     wiringpi.digitalWrite(16, GPIO.LOW)
+    wiringpi.digitalWrite(water_pump_pin, GPIO.LOW)
     print("Cleaning application and ending checking sensors!!")
 
 def TempGetVal(pin):
