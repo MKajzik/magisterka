@@ -10,8 +10,8 @@ COPY ./wiringOP-Python ./wiringOP-Python
 #RUN apk add swig python3-dev python3-setuptools
 
 # Install wiringOP-Python
-RUN python3 /wiringOP-Python/generate-bindings.py > /wiringOP-Python/bindings.i
-RUN sudo python3 /wiringOP-Python/setup.py install
+RUN python3 /magisterka/wiringOP-Python/generate-bindings.py > /magisterka/wiringOP-Python/bindings.i
+RUN sudo python3 /magisterka/wiringOP-Python/setup.py install
 
 # Trigger Python script
 WORKDIR /
