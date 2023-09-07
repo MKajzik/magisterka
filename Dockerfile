@@ -1,5 +1,5 @@
 # Python Base Image from https://hub.docker.com/r/arm32v7/python/
-FROM arm32v7/python:3.11.2
+FROM arm64v8/python:3.11.2-alpine
 
 # Copy the Python Script to blink LED
 COPY main.py ./
