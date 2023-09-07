@@ -70,10 +70,10 @@ else:
 
 
 wiringpi.wiringPiSetup()
+wiringpi.pinMode(16, GPIO.OUTPUT)
 wiringpi.digitalWrite(16, GPIO.HIGH)
 wiringpi.pinMode(soil_pin, GPIO.OUTPUT)
 wiringpi.pinMode(temp_pin, GPIO.OUTPUT)
-wiringpi.pinMode(16, GPIO.OUTPUT)
 wiringpi.pinMode(water_pump_pin, GPIO.OUTPUT)
 
 class DateTimeEncoder(json.JSONEncoder):
@@ -91,9 +91,11 @@ def ConvertToVoltage(value, bitdepth, vref):
     return vref*(value/(2**bitdepth-1))
 
 def CleanUP():
-    wiringpi.digitalWrite(16, GPIO.LOW)
-    wiringpi.digitalWrite(water_pump_pin, GPIO.LOW)
-    print("Cleaning application and ending checking sensors!!")
+	wiringpi.digitalWrite(16, GPIO.LOW)
+	wiringpi.digitalWrite(water_pump_pin, GPIO.LOW)
+	wiringpi.pinMode(soil_pin, GPIO.INPUT)
+	wiringpi.pinMode(temp_pin, GPIO.INPUT)
+	print("Cleaning application and ending checking sensors!!")
 
 def TempGetVal(pin):
 	tl=[]
