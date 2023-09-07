@@ -5,7 +5,7 @@ WORKDIR /magisterka
 
 # Copy the Python Script to blink LED
 COPY main.py .
-COPY ./wiringOP-Python ./wiringOP-Python
+COPY wiringOP-Python /wiringOP-Python
 
 #RUN apk add swig python3-dev python3-setuptools
 
