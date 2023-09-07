@@ -183,7 +183,7 @@ def WaterPlant(pin):
 			wiringpi.digitalWrite(water_pump_pin, GPIO.HIGH)
 			wiringpi.delay(4000) # 5 seconds
 			wiringpi.digitalWrite(water_pump_pin, GPIO.LOW)
-			wiringpi.delay(10000) # 1200000 = 20mins
+			wiringpi.delay(1200000) # 1200000 = 20mins
 			wateringStatus = Humidity(pin)
 
 
