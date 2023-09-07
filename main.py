@@ -166,6 +166,8 @@ def Humidity(pin):
 	wiringpi.delay(100)
 	wiringpi.digitalWrite(pin, GPIO.HIGH)
 	voltage = ConvertToVoltage(value, 12, 3.3)
+	ct = datetime.datetime.now()
+	print(ct,"-",f"{voltage:.3f}","V")
 
 	if(voltage > waterVoltage and voltage < (waterVoltage + half)):
 		return False
@@ -185,6 +187,7 @@ def WaterPlant(pin):
 			wiringpi.digitalWrite(water_pump_pin, GPIO.LOW)
 			wiringpi.delay(1200000) # 1200000 = 20mins
 			wateringStatus = Humidity(pin)
+			print("Water level is too low. Watering again")
 
 
 def PrintHumi(pin):
