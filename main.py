@@ -72,6 +72,7 @@ else:
 wiringpi.wiringPiSetup()
 wiringpi.digitalWrite(16, GPIO.HIGH)
 wiringpi.pinMode(soil_pin, GPIO.OUTPUT)
+wiringpi.pinMode(temp_pin, GPIO.OUTPUT)
 wiringpi.pinMode(16, GPIO.OUTPUT)
 wiringpi.pinMode(water_pump_pin, GPIO.OUTPUT)
 
@@ -97,8 +98,6 @@ def CleanUP():
 def TempGetVal(pin):
 	tl=[]
 	tb=[]
-	wiringpi.wiringPiSetup()
-	wiringpi.pinMode(pin, GPIO.OUTPUT)
 	wiringpi.digitalWrite(pin, GPIO.HIGH)
 	wiringpi.delay(1)
 	wiringpi.digitalWrite(pin, GPIO.LOW)
