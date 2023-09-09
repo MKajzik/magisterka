@@ -8,8 +8,6 @@ import json
 import os
 import requests
 import socket
-import requests
-import socket
 
 spi = spidev.SpiDev()
 spi.open(1,0)
