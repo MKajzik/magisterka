@@ -172,6 +172,8 @@ def PrintHumi(pin):
     voltage = ConvertToVoltage(value, 12, 3.3)
     ct = datetime.datetime.now()
     print(ct,"-",f"{voltage:.3f}","V")
+    value = (voltage - 1.25) / 1.25
+    print(ct,"-",f"{value:.1f}","%")
 
     if(voltage > waterVoltage and voltage < (waterVoltage + intervals)):
         print("Bardzo mokro")
@@ -182,7 +184,7 @@ def PrintHumi(pin):
         WaterPlant(pin)
 
     if(voltage != 0):
-        sensors["soil_moisture"]["value"] = voltage
+        sensors["soil_moisture"]["value"] = value
         sensors["soil_moisture"]["timestamp"] = ct
 
 def PrintTemp(pin):
@@ -208,8 +210,10 @@ while(True):
     PrintTemp(temp_pin)
     jsonData = json.dumps(sensors, default=serialize_datetime)
     try:
-        headers = {'Content-type': 'application/json'}
-        r = requests.post('https://kazscrap.k8s.icydusk.io/sensors', data=jsonData, headers=headers)
+        if(sensors["soil_moisture"]["timestamp"] != "" and sensors["humidity"]["timestamp"] != "" and sensors["temperature"]["timestamp"] != ""):
+            print("Sending data to scraper")
+            headers = {'Content-type': 'application/json'}
+            r = requests.post('https://kazscrap.k8s.icydusk.io/sensors', data=jsonData, headers=headers)
     except requests.exceptions.ConnectionError as ex:
         print('Issue to send sensors data...'+str(ex))
     except Exception as ex:
